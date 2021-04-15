@@ -20,8 +20,7 @@ public class CSES1192 {
     static void dfs(int i , int j) {
         vis[i][j] = true;
 
-        // If parent cell is (-1 -1) it means this is first DFS call , hence we call increase
-        // count of connected components.
+       	// Check four adjacent cells
 
         if (i - 1 >= 0 && g[i - 1][j] == '.' && !vis[i - 1][j]) dfs(i - 1 , j);
         if (i + 1 < n && g[i + 1][j] == '.' && !vis[i + 1][j]) dfs(i + 1 , j);
