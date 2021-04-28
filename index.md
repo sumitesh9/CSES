@@ -2,4 +2,4 @@
 
 # My CSES ID - https://cses.fi/user/18428
 
-Total solved tasks - 104
+Total solved tasks - 105
