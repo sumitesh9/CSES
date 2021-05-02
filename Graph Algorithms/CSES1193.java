@@ -14,7 +14,7 @@ public class CSES1193 {
     /*
         Traverse the grid using BFS technique to find the 
         shortest distance
-        Using distance vectors(check implementation below) we can reduce the if verbose
+        Using distance vectors(check implementation below) we can reduce the 'if' statements verbose
     */
 
     static int n , m , dx[] , dy[];
