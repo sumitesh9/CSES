@@ -58,11 +58,6 @@ public class CSES1666 {
         }
     }
 
-
-    /*
-        
-    */
-
     public static void main(String args[])throws Exception {
         br = new BufferedReader(new InputStreamReader(System.in));
         st = new StringTokenizer(br.readLine());
@@ -93,8 +88,7 @@ public class CSES1666 {
                 }
             }
         }
-
-
+        
         pw.close();
         br.close();
     }
