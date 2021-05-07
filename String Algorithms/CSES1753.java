@@ -6,8 +6,8 @@ public class CSES1753 {
     static PrintWriter pw;
 
     /*
-        This problem can be solved by implementing Z algorithm
-        Refer to Pg 248 of CP Handbook by Antti Laaksonen
+        This problem can be solved by implementing Z algorithm or KMP algorithm
+        Refer to Pg 248 of CP Handbook by Antti Laaksonen for Z Algorithm
 
         We basically need to construct Z array efficiently (O(n)) where
         Z[i] = length of longest substring starting from i which is also prefix
