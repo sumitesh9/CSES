@@ -53,7 +53,7 @@ public class CSES2185 {
 
 		for (int i = 0; i < k; ++i) a[i] = nl();
 
-			long ans = 0l;
+		long ans = 0l;
 		for (int i = 0; i < (1l << k); ++i) {
 			long p = 1;
 			int cnt = 0;
