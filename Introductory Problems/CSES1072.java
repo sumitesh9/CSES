@@ -21,7 +21,7 @@ public class CSES1072 {
 
         (n - 1) * (n - 2) + (n - 2) * (n - 1) = 2 * (n - 1) * (n - 2)
 
-        (n - 1) ways of picking topleft square as if we cant pick last row (Think Why ?)
+        (n - 1) ways of picking topleft square as we can't pick last row (Think Why ?)
         (n - 2) ways of picking bottom right sqaure
 
         and for each 2 * 3 or 3 * 2 chess board we have two ways of putting 
