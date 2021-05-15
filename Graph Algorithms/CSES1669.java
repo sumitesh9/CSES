@@ -13,33 +13,33 @@ public class CSES1669 {
         or print impossible if there is no cycle.
     */
 
-    static void dfs(int u , int p) { 
-        vis[u] = true;
-        if (ok) return;
-        for (Integer v : adj[u]) {
-            if (!vis[v]) {
-                par[v] = u;
-                dfs(v , u);
-            }
-            else {
-                if (v != p) {
-                    if (ok) return;
-                    ok = true;
-                    int curr = u;
-                    ArrayList<Integer> cycle = new ArrayList<>();
-                    while (curr != v) {
-                        cycle.add(curr);
-                        curr = par[curr];
-                    }
-                    cycle.add(v);
-                    cycle.add(u);
-                    pw.println(cycle.size());
-                    for (Integer j : cycle) pw.print((j + 1) + " ");
-                    return;
-                } 
+        static void dfs(int u , int p) { 
+            vis[u] = true;
+            if (ok) return;
+            for (Integer v : adj[u]) {
+                if (!vis[v]) {
+                    par[v] = u;
+                    dfs(v , u);
+                }
+                else {
+                    if (v != p) {
+                        if (ok) return;
+                        ok = true;
+                        int curr = u;
+                        ArrayList<Integer> cycle = new ArrayList<>();
+                        while (curr != v) {
+                            cycle.add(curr);
+                            curr = par[curr];
+                        }
+                        cycle.add(v);
+                        cycle.add(u);
+                        pw.println(cycle.size());
+                        for (Integer j : cycle) pw.print((j + 1) + " ");
+                            return;
+                    } 
+                }
             }
         }
-    }
 
         public static void main(String args[])throws Exception {
             FastScanner f = new FastScanner(System.in);
@@ -68,106 +68,106 @@ public class CSES1669 {
             }
 
             if (!ok) pw.println("IMPOSSIBLE");
-        
-        pw.close();
-    }
-
-    public static class FastScanner {
-        private InputStream stream;
-        private byte[] buf = new byte[1024];
-        private int curChar;
-        private int numChars;
-        private FastScanner.SpaceCharFilter filter;
-
-        public FastScanner(InputStream stream) {
-            this.stream = stream;
+            
+            pw.close();
         }
 
-        public int read() {
-            if (numChars == -1)
-                throw new InputMismatchException();
+        public static class FastScanner {
+            private InputStream stream;
+            private byte[] buf = new byte[1024];
+            private int curChar;
+            private int numChars;
+            private FastScanner.SpaceCharFilter filter;
 
-            if (curChar >= numChars) {
-                curChar = 0;
-                try {
-                    numChars = stream.read(buf);
-                } catch (IOException e) {
+            public FastScanner(InputStream stream) {
+                this.stream = stream;
+            }
+
+            public int read() {
+                if (numChars == -1)
                     throw new InputMismatchException();
+
+                if (curChar >= numChars) {
+                    curChar = 0;
+                    try {
+                        numChars = stream.read(buf);
+                    } catch (IOException e) {
+                        throw new InputMismatchException();
+                    }
+
+                    if (numChars <= 0)
+                        return -1;
+                }
+                return buf[curChar++];
+            }
+
+            public int ni() {
+                int c = read();
+
+                while (isSpaceChar(c))
+                    c = read();
+
+                int sgn = 1;
+
+                if (c == '-') {
+                    sgn = -1;
+                    c = read();
                 }
 
-                if (numChars <= 0)
-                    return -1;
-            }
-            return buf[curChar++];
-        }
+                int res = 0;
+                do {
+                    if (c < '0' || c > '9') throw new InputMismatchException();
+                    res *= 10;
+                    res += c - '0';
+                    c = read();
+                }
+                while (!isSpaceChar(c));
 
-        public int ni() {
-            int c = read();
-
-            while (isSpaceChar(c))
-                c = read();
-
-            int sgn = 1;
-
-            if (c == '-') {
-                sgn = -1;
-                c = read();
+                return res * sgn;
             }
 
-            int res = 0;
-            do {
-                if (c < '0' || c > '9') throw new InputMismatchException();
-                res *= 10;
-                res += c - '0';
-                c = read();
+            public long nl() {
+                int c = read();
+                while (isSpaceChar(c))
+                    c = read();
+                int sgn = 1;
+                if (c == '-') {
+                    sgn = -1;
+                    c = read();
+                }
+                long res = 0;
+
+                do {
+                    if (c < '0' || c > '9') throw new InputMismatchException();
+                    res *= 10;
+                    res += c - '0';
+                    c = read();
+                }
+                while (!isSpaceChar(c));
+                return res * sgn;
             }
-            while (!isSpaceChar(c));
 
-            return res * sgn;
-        }
-
-        public long nl() {
-            int c = read();
-            while (isSpaceChar(c))
-                c = read();
-            int sgn = 1;
-            if (c == '-') {
-                sgn = -1;
-                c = read();
+            public String next() {
+                int c = read();
+                while (isSpaceChar(c))
+                    c = read();
+                StringBuilder res = new StringBuilder();
+                do {
+                    res.appendCodePoint(c);
+                    c = read();
+                }
+                while (!isSpaceChar(c));
+                return res.toString();
             }
-            long res = 0;
 
-            do {
-                if (c < '0' || c > '9') throw new InputMismatchException();
-                res *= 10;
-                res += c - '0';
-                c = read();
+            public boolean isSpaceChar(int c) {
+                if (filter != null)
+                    return filter.isSpaceChar(c);
+                return c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == -1;
             }
-            while (!isSpaceChar(c));
-            return res * sgn;
-        }
 
-        public String next() {
-            int c = read();
-            while (isSpaceChar(c))
-                c = read();
-            StringBuilder res = new StringBuilder();
-            do {
-                res.appendCodePoint(c);
-                c = read();
+            public interface SpaceCharFilter {
+                public boolean isSpaceChar(int ch);
             }
-            while (!isSpaceChar(c));
-            return res.toString();
-        }
-
-        public boolean isSpaceChar(int c) {
-            if (filter != null)
-                return filter.isSpaceChar(c);
-            return c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == -1;
-        }
-
-        public interface SpaceCharFilter {
-            public boolean isSpaceChar(int ch);
         }
     }
-}
