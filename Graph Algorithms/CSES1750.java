@@ -8,7 +8,7 @@ public class CSES1750 {
 
     /*
         Let par[i][j] denote (1 << j)th ancestor of i (This technique is binary lifting)
-        Now lets' say we want to kth ancestor of i
+        Now lets' say we want to find kth ancestor of i
 
         Assume k = 45 (without any loss of generality)
         45 = 32 + 8 + 4 + 1
