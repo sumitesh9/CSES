@@ -15,8 +15,8 @@ public class CSES2428 {
     }
 
     /*
-     * Implement a sliding window and a multiset to count frequency of each element
-     * in a window.
+     * Maintain frequencies of elements in a sliding window and add contribution of
+     * each window.
      */
     public static void main(String[] args) throws IOException {
         br = new BufferedReader(new InputStreamReader(System.in));
