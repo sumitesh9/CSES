@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
  
-public class cses {
+public class CSES1091 {
     static class Reader
     {
         final private int BUFFER_SIZE = 1 << 16;
