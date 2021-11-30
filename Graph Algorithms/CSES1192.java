@@ -1,7 +1,7 @@
-import java.util.*;
-import java.io.*;
-import java.math.BigInteger;
-import java.text.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.InputMismatchException;
 
 public class CSES1192 {
     static long mod = 1000_000_007;

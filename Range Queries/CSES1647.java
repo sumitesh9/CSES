@@ -9,38 +9,15 @@ public class CSES1647 {
         return Integer.parseInt(st.nextToken());
     }
  
-    static int n , q , a[];
+    static int n , q , a[] , log[] , maxN , spt[][] , oo;
  
     /*  
-        Range Minimum queries can be efficiently solved using Segment Tree or 
-        Square Root Decomposition
- 
-        RMQ using Segment Tree - Time complexity - O(nlogq)
-                                 Space complexity - O(2 * n)
- 
-        Below is minimal implementation of Segment tree in Java (without update query)
+        Static range minimum queries can be solved efficiently using sparse table
+        spt[i][j] = Minimum of the range [i , i + (1 << j) - 1]
+
+        let k = maximum power of 2 that doesn't exceed (j - i + 1)
+        min[i , j] = min(spt[i][k] , spt[j - k + 1][j]);
     */
- 
-    static class RMQ {
-        private int t[];
- 
-        public RMQ(int a[]) {
-            t = new int[2 * a.length];
-            for (int i = 0; i < n; ++i) t[n + i] = a[i];
- 
-            for (int i = n - 1; i >= 0; --i) t[i] = Math.min(t[(i << 1)] , t[(i << 1) + 1]);
-        }
- 
-        public int query(int l , int r) {
-            int ans = Integer.MAX_VALUE;
-            if (l >= r) return ans;
-            for (l += n , r += n; l < r; l /= 2 , r /= 2) {
-                if ((l & 1) == 1) ans = Math.min(ans , t[l++]);
-                if ((r & 1) == 1) ans = Math.min(ans , t[--r]);
-            }
-            return ans;
-        }
-    }
  
     public static void main(String args[])throws Exception {
         br = new BufferedReader(new InputStreamReader(System.in));
@@ -48,24 +25,40 @@ public class CSES1647 {
         pw = new PrintWriter(System.out);
  
         n = ni(); q = ni();
+        maxN = (int)2e5 + 2;
+        log = new int[maxN + 1];
+        spt = new int[maxN][26];
+        oo = Integer.MAX_VALUE;
+        log[1] = 0;
+        for (int i = 2; i <= maxN; ++i) log[i] = log[i / 2] + 1;
+
         
         a = new int[n];
- 
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; ++i) a[i] = ni();
- 
-        RMQ t = new RMQ(a);
- 
-        StringBuffer sb = new StringBuffer("");
+
+        for (int i = 0; i < maxN; ++i) {
+            for (int j = 0; j < 26; ++j) {
+                spt[i][j] = oo;
+            }
+        }
+        
+        for (int i = 0; i < n; ++i) spt[i][0] = a[i];
+        for (int j = 1; j < 26; ++j) {
+            for (int i = 0; i + (1 << j) <= n; ++i) {
+                spt[i][j] = Math.min(spt[i][j - 1] , spt[i + (1 << (j - 1))][j - 1]);
+            }
+        }
+
         for (int i = 0; i < q; ++i) {
             st = new StringTokenizer(br.readLine());
-            int u = ni() - 1;
-            int v = ni();
- 
-            sb.append(t.query(u , v) + "\n");
+            int l = ni() - 1;
+            int r = ni() - 1;
+            int j = log[r - l + 1];
+            int min = Math.min(spt[l][j] , spt[r - (1 << j) + 1][j]);
+            pw.println(min);
         }
-        pw.println(sb);
- 
+        
         pw.close();
         br.close();
     }

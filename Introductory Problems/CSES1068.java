@@ -1,7 +1,9 @@
-import java.util.*;
-import java.io.*;
-import java.math.BigInteger;
-import java.text.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
 
 public class CSES1068 {
     static long mod = 1000_000_007;
